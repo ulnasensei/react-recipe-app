@@ -10,7 +10,7 @@ function App() {
             <NavigationBar />
             <Routes>
                 <Route path="/" element={<Recipes />} />
-                <Route path="recipe/:recipe" element={<Recipe />} />
+                <Route path="recipe/*" element={<Recipe />} />
             </Routes>
         </>
     );
