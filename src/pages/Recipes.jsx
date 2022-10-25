@@ -12,7 +12,7 @@ const Recipes = () => {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const fetchRecipes = useCallback(() => {
+    const fetchRecipes = useCallback((key) => {
         const url = "https://www.themealdb.com/api/json/v1/1/search.php?f=" + key;
         setLoading(true);
         fetch(url)
@@ -22,7 +22,7 @@ const Recipes = () => {
                 setRecipes(data.meals);
             })
             .catch((e) => console.log(e));
-    }, [key]);
+    }, []);
 
     const handlePageChange = (e, key) => {
         fetchRecipes(key);
