@@ -4,8 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
 import ReactLoading from "react-loading";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import RecipeCard from "../components/recipeCard/RecipeCard";
 
 const Recipes = () => {
@@ -13,7 +12,7 @@ const Recipes = () => {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const fetchRecipes = async (key) => {
+    const fetchRecipes = useCallback((key) => {
         const url = "https://www.themealdb.com/api/json/v1/1/search.php?f=" + key;
         setLoading(true);
         fetch(url)
@@ -23,7 +22,7 @@ const Recipes = () => {
                 setRecipes(data.meals);
             })
             .catch((e) => console.log(e));
-    };
+    });
 
     const handlePageChange = (e, key) => {
         fetchRecipes(key);

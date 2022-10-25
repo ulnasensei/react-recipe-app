@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useCallback } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -13,7 +13,7 @@ const Recipe = () => {
     const [loading, setLoading] = useState(false);
     const recipeID = useLocation().pathname.split("/")[2];
 
-    const fetchRecipes = async () => {
+    const fetchRecipes = useCallback(() => {
         const url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + recipeID;
         setLoading(true);
         fetch(url)
@@ -23,7 +23,7 @@ const Recipe = () => {
                 setRecipe(data.meals);
             })
             .catch((e) => console.log(e));
-    };
+    });
     useEffect(() => {
         fetchRecipes();
     }, []);
