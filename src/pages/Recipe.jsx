@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -13,7 +13,7 @@ const Recipe = () => {
     const [loading, setLoading] = useState(false);
     const recipeID = useLocation().pathname.split("/")[2];
 
-    const fetchRecipes = useCallback(() => {
+    const fetchRecipes = () => {
         const url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + recipeID;
         setLoading(true);
         fetch(url)
@@ -23,9 +23,10 @@ const Recipe = () => {
                 setRecipe(data.meals);
             })
             .catch((e) => console.log(e));
-    }, []);
+    };
     useEffect(() => {
         fetchRecipes();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     console.log(recipeID);
@@ -79,7 +80,11 @@ const Recipe = () => {
                                     <tr>
                                         <th>Video Recipe</th>
                                         <td>
-                                            <a href={recipe[0].strYoutube} target="_blank">
+                                            <a
+                                                href={recipe[0].strYoutube}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
                                                 Watch on Youtube
                                             </a>
                                         </td>
