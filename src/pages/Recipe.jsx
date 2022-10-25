@@ -23,7 +23,7 @@ const Recipe = () => {
                 setRecipe(data.meals);
             })
             .catch((e) => console.log(e));
-    });
+    }, []);
     useEffect(() => {
         fetchRecipes();
     }, []);
