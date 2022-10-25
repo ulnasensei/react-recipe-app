@@ -13,7 +13,7 @@ const RecipeCard = ({ meal }) => {
             <Card.Body className="text-center">
                 <Card.Title className="text-truncate">{meal.strMeal}</Card.Title>
                 <Card.Text className="text-truncate">{meal.strInstructions}</Card.Text>
-                <Button variant="primary" data-recipe={meal.idMeal}>
+                <Button variant="primary" data-recipe={meal.idMeal} onClick={handleBtnClick}>
                     Go to recipe
                 </Button>
             </Card.Body>
